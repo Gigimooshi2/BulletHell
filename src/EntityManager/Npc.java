@@ -9,5 +9,4 @@ public class Npc extends Character{
 		super(health, speed, hitBox, texture);
 		// TODO Auto-generated constructor stub
 	}
-
 }

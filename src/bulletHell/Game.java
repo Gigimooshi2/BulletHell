@@ -15,7 +15,7 @@ public class Game{
 	RangedPlayer rangedPlayer;
 	MeleePlayer meleePlayer;
 	public Game() {
-		meleePlayer = new MeleePlayer(new Sword(), 0, 10, 10, 0, 10, 3, new Rectangle(App.frameWidth/2-32,App.frameHeight-64,64,64), null);
+		meleePlayer = new MeleePlayer(new Sword(), 0, 10, 10, 0, 10, 5, new Rectangle(App.frameWidth/2-32,App.frameHeight-64,64,64), null);
 		int[][] levelMap = { {0,0,0},{1,1,1},{0,0,0}};
 		Vector<Entity> levelEntities = new Vector<Entity>();
 		levelEntities.add(meleePlayer);
@@ -25,37 +25,5 @@ public class Game{
 		currentLevel.draw(g);
 	}
 	public void keyPressedHandler(int code) {
-		if(code==KeyEvent.VK_D)
-		{
-		}
-		if(code==KeyEvent.VK_A)
-		{
-		}
-		if(code==KeyEvent.VK_S)
-		{
-		}
-		if(code==KeyEvent.VK_W)
-		{
-		}
-		if(code==KeyEvent.VK_SPACE)
-		{
-		}
-	}
-	public void keyReleasedHandler(int code) {
-		if(code==KeyEvent.VK_D)
-		{
-		}
-		if(code==KeyEvent.VK_A)
-		{
-		}
-		if(code==KeyEvent.VK_S)
-		{
-		}
-		if(code==KeyEvent.VK_W)
-		{
-		}
-		if(code==KeyEvent.VK_SPACE)
-		{
-		}
 	}
 }
