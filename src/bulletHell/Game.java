@@ -6,6 +6,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.Vector;
 
+import javax.swing.ImageIcon;
+
+import TileManager.*;
+
 import EntityManager.Entity;
 import PlayerManager.MeleePlayer;
 import PlayerManager.RangedPlayer;
@@ -14,15 +18,19 @@ public class Game{
 	Level currentLevel;
 	RangedPlayer rangedPlayer;
 	MeleePlayer meleePlayer;
+	Tile tile;
 	public Game() {
 		meleePlayer = new MeleePlayer(new Sword(), 0, 10, 10, 0, 10, 3, new Rectangle(App.frameWidth/2-32,App.frameHeight-64,64,64), null);
 		int[][] levelMap = { {0,0,0},{1,1,1},{0,0,0}};
 		Vector<Entity> levelEntities = new Vector<Entity>();
 		levelEntities.add(meleePlayer);
 		currentLevel = new Level(levelMap,levelEntities);
+		tile=new Platform(new ImageIcon("image.png").getImage(), 100, 100, 100, 100);
 	}
 	public void draw(Graphics g){
 		currentLevel.draw(g);
+		tile.draw(g);
+		
 	}
 	public void keyPressedHandler(int code) {
 		if(code==KeyEvent.VK_D)
