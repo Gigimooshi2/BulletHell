@@ -2,7 +2,6 @@ package EntityManager;
 
 import java.awt.Image;
 import java.awt.Rectangle;
-
 public class Character extends Entity{
 	int physicalHealth;
 	public Character(int health,double speed, Rectangle hitBox, Image texture) {

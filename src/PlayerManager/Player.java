@@ -4,7 +4,6 @@ import java.awt.Image;
 import java.awt.Rectangle;
 
 import EntityManager.Character;
-
 public class Player extends Character{
 	int mana;
 	int spiritHealth;
@@ -17,5 +16,17 @@ public class Player extends Character{
 		this.stamina = stamina;
 		this.cash = cash;
 		// TODO Auto-generated constructor stub
-	}	
+	}
+	public void movePlayerLeft() {
+		//TODO, detailed movement vector
+		hitBox.x -= speed;
+	}
+	public void movePlayerRight() {
+		//TODO, detailed movement vector
+		hitBox.x += speed;
+	}
+	protected void jumpPlayer() {
+		//TODO, detailed jump vector
+		
+	}
 }

@@ -8,21 +8,26 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Vector;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.ArrayList;
 
 import javax.swing.*;
 
-
-public class App extends JPanel implements ActionListener{
+import PlayerMovement.*;
+public class App extends JComponent implements ActionListener{
 	static Game gameWorld;
 	static int frameWidth;
 	static int frameHeight;
+	public static ExecutorService threadPool = Executors.newFixedThreadPool(2);
 	Timer T;
 	public static void main(String[] args) {
 		App app=new App();
 		JFrame frame=new JFrame("Game Frame");
 		frameSettings(app,frame);
 		gameWorld = new Game();
+		setKeyBinds(app,KeyEvent.VK_A,MoveLeftSolution.getInstance(gameWorld.meleePlayer));
+		setKeyBinds(app,KeyEvent.VK_D,MoveRightSolution.getInstance(gameWorld.meleePlayer));		
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -31,7 +36,8 @@ public class App extends JPanel implements ActionListener{
 		}
 	}
 	public App(){
-		addKeyListener(new KL ());
+		
+		
 		setFocusable(true);
 		T = new Timer(20,this);
 		T.start();
@@ -53,18 +59,31 @@ public class App extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		repaint();
 	}
-	class KL extends KeyAdapter
+	class KeyListenerD extends KeyAdapter
     {
 		public void keyPressed(KeyEvent e)
 		{
 			int code=e.getKeyCode();
-			gameWorld.keyPressedHandler(code);
+			if(code==KeyEvent.VK_D) {System.out.println(code);}
+			//gameWorld.keyPressedHandler(code);
 		}
-		public void keyReleased(KeyEvent e)
+	}
+	class KeyListenerA extends KeyAdapter
+    {
+		public void keyPressed(KeyEvent e)
 		{
-		
 			int code=e.getKeyCode();
-			gameWorld.keyReleasedHandler(code);
+			if(code==KeyEvent.VK_A) {System.out.println(code);}
+			//gameWorld.keyPressedHandler(code);
+		}
+	}
+	class KeyListenerSpace extends KeyAdapter
+    {
+		public void keyPressed(KeyEvent e)
+		{
+			int code=e.getKeyCode();
+			if(code==KeyEvent.VK_SPACE) {System.out.println(code);}
+			//gameWorld.keyPressedHandler(code);
 		}
 	}
 	public void  hideMouseCursor(){
@@ -83,5 +102,25 @@ public class App extends JPanel implements ActionListener{
 		super.paintComponent(g);
 		if(gameWorld != null)
 		gameWorld.draw(g);
+	}
+	public static void setKeyBinds(App app,int key,IStrategy algorithm) {
+		app.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+			    .put(KeyStroke.getKeyStroke(key, 0, false), key+"Action");
+		app.getActionMap().put(key+"Action", new AbstractAction() {
+			        @Override
+			        public void actionPerformed(ActionEvent e) {
+			        	System.out.println(key);
+			        	algorithm.Move();
+			        }
+			    });
+		app.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+	    		.put(KeyStroke.getKeyStroke(key, 0, true), key+"Typed Action");
+		app.getActionMap().put(key+"Typed Action", new AbstractAction() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	        	System.out.println("Released "+key);
+	        	algorithm.Stop();
+	        }
+	    });
 	}
 }

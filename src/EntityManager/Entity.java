@@ -5,9 +5,10 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 
-public class Entity {
-	double speed;
-	Rectangle hitBox;
+
+public class Entity{
+	protected double speed;
+	protected Rectangle hitBox;
 	Image texture;
 	public Entity(double speed, Rectangle hitBox, Image texture) {
 		this.speed = speed;
