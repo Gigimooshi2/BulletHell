@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 
-public class Entity {
+public abstract class Entity {
 	double speed;
 	Rectangle hitBox;
 	Image texture;
@@ -14,11 +14,6 @@ public class Entity {
 		this.hitBox = hitBox;
 		this.texture = texture;
 	}
-	public void draw(Graphics g){
-		g.setColor(Color.GREEN);
-		//Hitbox draw, temp.
-		g.drawRect(hitBox.x, hitBox.y, hitBox.width, hitBox.height);
-		//Actual draw
-		g.drawImage(texture, hitBox.x,hitBox.y,hitBox.width,hitBox.height, null);
-	}
+	public abstract void draw(Graphics g);
+	public abstract void EntityCollisionHandler();
 }

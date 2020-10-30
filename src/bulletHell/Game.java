@@ -1,9 +1,12 @@
 package bulletHell;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
@@ -19,17 +22,24 @@ public class Game{
 	RangedPlayer rangedPlayer;
 	MeleePlayer meleePlayer;
 	Tile tile;
-	public Game() {
+	Maps map;
+	public Game() throws IOException {
 		meleePlayer = new MeleePlayer(new Sword(), 0, 10, 10, 0, 10, 3, new Rectangle(App.frameWidth/2-32,App.frameHeight-64,64,64), null);
 		int[][] levelMap = { {0,0,0},{1,1,1},{0,0,0}};
 		Vector<Entity> levelEntities = new Vector<Entity>();
 		levelEntities.add(meleePlayer);
 		currentLevel = new Level(levelMap,levelEntities);
-		tile=new Platform(new ImageIcon("image.png").getImage(), 100, 100, 100, 100);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		//tile=new Platform(new ImageIcon("image.png").getImage(), 0, 0, (screenSize.width/40)*2, screenSize.height/40);
+		map=new Maps();
+		map.initfirstmap();
 	}
-	public void draw(Graphics g){
-		currentLevel.draw(g);
-		tile.draw(g);
+	public void draw(Graphics g)
+	{
+		//currentLevel.draw(g);
+		//tile.draw(g);
+		map.draw(g);
+		
 		
 	}
 	public void keyPressedHandler(int code) {

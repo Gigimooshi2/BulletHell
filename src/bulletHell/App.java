@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Vector;
@@ -18,7 +19,7 @@ public class App extends JPanel implements ActionListener{
 	static int frameWidth;
 	static int frameHeight;
 	Timer T;
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		App app=new App();
 		JFrame frame=new JFrame("Game Frame");
 		frameSettings(app,frame);
